@@ -85,24 +85,45 @@ const config = convict({
       arg: 'mailer_enabled',
       env: 'MAILER_ENABLED'
     },
-    api_key: {
-      doc: `Sendinblue API key`,
+    port: {
+      doc: `nodemailer smpt port`,
       format: String,
-      default: 'notAnApiKey',
-      arg: 'api_key',
-      env: 'MAILER_API_KEY'
+      default: 'notAnMailPort',
+      arg: 'mailer_port',
+      env: 'MAILER_PORT'
     },
     host: {
-      doc: `Mailgun host`,
+      doc: `nodemailter smtp host`,
       format: String,
-      default: 'api.sendinblue.com',
+      default: 'notAHost',
       arg: 'mailer_host',
       env: 'MAILER_HOST'
+    },
+    user:{
+      doc: `nodemailter smtp user`,
+      format: String,
+      default: 'notAUser',
+      arg: 'mailer_user',
+      env: 'MAILER_USER'
+    },
+    passwd:{
+      doc: `nodemailter smtp passwd`,
+      format: String,
+      default: 'notAPasswd',
+      arg: 'mailer_passwd',
+      env: 'MAILER_PASSWD'
+    },
+    ssl: {
+      doc: `nodemailter use tls`,
+      format: Boolean,
+      default: true,
+      arg: 'mailer_use_tls',
+      env: 'MAILER_USE_TLS'
     },
     contact: {
       doc: `Email adress`,
       format: 'email',
-      default: 'doryan.chaigneau@epsi.fr',
+      default: 'arthur.dufour@epsi.fr',
       arg: 'mailer_contact',
       env: 'MAILER_CONTACT'
     }
