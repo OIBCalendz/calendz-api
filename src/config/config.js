@@ -123,7 +123,7 @@ const config = convict({
     contact: {
       doc: `Email adress`,
       format: 'email',
-      default: 'doryan.chaigneau@epsi.fr',
+      default: 'arthur.dufour@epsi.fr',
       arg: 'mailer_contact',
       env: 'MAILER_CONTACT'
     }
