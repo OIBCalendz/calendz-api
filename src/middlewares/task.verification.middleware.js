@@ -47,7 +47,8 @@ exports.hasCreateFields = async (req, res, next) => {
   // check if targets are all valid
   if (_targets && _targets.length > 0) {
     req.body.targets = []
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     for (const target of _targets) {
       if (!re.test(target.email.toLowerCase())) {
         errors.push(`L'email "${target.email}" n'est pas valide`)
@@ -58,7 +59,11 @@ exports.hasCreateFields = async (req, res, next) => {
       }
     }
 
-    if (!req.body.targets.some(id => id.toString() === req.decodedUserId.toString())) req.body.targets.push(req.decodedUserId)
+    if (
+      !req.body.targets.some(
+        (id) => id.toString() === req.decodedUserId.toString()
+      )
+    ) req.body.targets.push(req.decodedUserId)
   }
 
   if (errors.length) {

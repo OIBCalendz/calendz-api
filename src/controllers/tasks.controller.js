@@ -13,6 +13,15 @@ exports.getAll = async (req, res) => {
   })
 }
 
+exports.getAllTasksByTag = async (req, res) => {
+  const _userId = req.params.userId
+  const _tags = req.body.tags
+  const tasks = await TasksService.getAllTasksByTag(_userId, _tags)
+  return res.status(200).json({
+    tasks
+  })
+}
+
 // create a task
 exports.create = async (req, res) => {
   const _user = await UserService.findOne({ _id: req.decodedUserId })
@@ -28,9 +37,9 @@ exports.create = async (req, res) => {
   const grade = _user.grade
   const group = _user.group
   const targets = req.body.targets || []
-
+  const tags = req.body.tags || []
   // create the task
-  const task = await TasksService.create(author, date, type, title, description, subject, school, city, grade, group, targets)
+  const task = await TasksService.create(author, date, type, title, description, subject, school, city, grade, group, targets, tags)
 
   // push notifications to every user affected by the task
   const notifDate = dateUtil.dateToFullString(dateUtil.timestampToDate(date))
@@ -117,8 +126,8 @@ exports.modify = async (req, res) => {
   const _date = new Date(req.body.date).getTime()
   const _description = req.body.description
   const _targets = req.body.targets
-
-  await TasksService.modify(_taskId, _title, _type, _subject, _date, _description, _targets)
+  const tags = req.body.tags || []
+  await TasksService.modify(_taskId, _title, _type, _subject, _date, _description, _targets, tags)
   const task = await TasksService.findOne({ _id: _taskId })
 
   return res.status(200).json({

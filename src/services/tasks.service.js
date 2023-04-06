@@ -34,7 +34,11 @@ exports.findAll = async (search = {}) => {
   const tasks = await Task.find(search)
     .populate('author', '_id grade city')
     .lean()
-  // console.log(tasks.filter(t => t.author.grade == null))
+  return tasks
+}
+
+exports.getAllTasksByTags = async (userId, tags) => {
+  const tasks = await Task.find({ author: userId, tags: { $in: tags } })
   return tasks
 }
 

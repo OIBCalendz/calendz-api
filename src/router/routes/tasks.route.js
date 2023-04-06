@@ -16,6 +16,14 @@ router.get('/:userId', [
   TasksController.getAll
 ])
 
+// Récupération de toutes les tâches d'un utilisateur par tag
+router.put('/:userId', [
+  // JwtVerificationMiddleware.hasValidAccessOrRefreshToken,
+  // PermissionVerificationMiddleware.sameUserOrAdmin,
+  // UserVerificationMiddleware.hasValidId,
+  TasksController.getAllTasksByTags
+])
+
 // Création d'une tâche
 router.post('/', [
   JwtVerificationMiddleware.hasValidAccessOrRefreshToken,
